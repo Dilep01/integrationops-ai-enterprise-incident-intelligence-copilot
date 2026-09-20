@@ -6,7 +6,7 @@ This repository contains a local, credential-free implementation through Phase 1
 authentication failures, timeouts, mapping errors, invalid payloads, and duplicate transactions
 using synthetic enterprise evidence.
 
-## Implemented in Phase 1
+## Implemented capabilities through Phase 10
 
 - Typed incident, evidence, hypothesis, and report contracts
 - A controlled LangGraph investigation workflow
