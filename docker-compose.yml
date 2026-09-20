@@ -1,0 +1,85 @@
+services:
+  web:
+    build:
+      context: ./apps/web
+    ports:
+      - "3000:80"
+    depends_on:
+      - api
+
+  api:
+    build: .
+    environment:
+      INTEGRATIONOPS_ENV: development
+      INTEGRATIONOPS_DATABASE_URL: postgresql+psycopg://integrationops:integrationops@postgres:5432/integrationops
+      INTEGRATIONOPS_CHECKPOINT_PATH: /app/.data/checkpoints.sqlite3
+      INTEGRATIONOPS_QDRANT_URL: http://qdrant:6333
+      INTEGRATIONOPS_REMEDIATION_PROVIDER: local_http
+      INTEGRATIONOPS_REMEDIATION_BASE_URL: http://integration-runtime:8081
+      INTEGRATIONOPS_REMEDIATION_API_KEY: ${INTEGRATION_RUNTIME_API_KEY:-local-demo-key}
+      INTEGRATIONOPS_REMEDIATION_TIMEOUT_SECONDS: 2
+      INTEGRATIONOPS_REMEDIATION_MAX_ATTEMPTS: 3
+    ports:
+      - "8000:8000"
+    volumes:
+      - app_data:/app/.data
+    depends_on:
+      postgres:
+        condition: service_healthy
+      qdrant:
+        condition: service_started
+      integration-runtime:
+        condition: service_healthy
+
+  integration-runtime:
+    build: .
+    command:
+      - uvicorn
+      - integration_runtime.api:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8081"
+    environment:
+      INTEGRATION_RUNTIME_API_KEY: ${INTEGRATION_RUNTIME_API_KEY:-local-demo-key}
+      INTEGRATION_RUNTIME_TIMEOUT_SIMULATION_SECONDS: 2
+    ports:
+      - "8081:8081"
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8081/health')"
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  postgres:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: integrationops
+      POSTGRES_USER: integrationops
+      POSTGRES_PASSWORD: integrationops
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U integrationops -d integrationops"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  qdrant:
+    image: qdrant/qdrant:v1.15.4
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
+volumes:
+  app_data:
+  postgres_data:
+  qdrant_data:

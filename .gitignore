@@ -1,0 +1,16 @@
+.venv/
+node_modules/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.coverage
+.env
+.data/
+.firecrawl/
+dist/
+build/
+apps/web/dist/
+*.tsbuildinfo
+*.egg-info/
+integrationops-ai-portfolio-package.zip

@@ -1,0 +1,10 @@
+{"case_id":"RET-001","query":"HTTP 401 started immediately after client secret rotation","expected_document_ids":["token-renewal-runbook","oauth-authentication-guide"],"k":3}
+{"case_id":"RET-002","query":"What are the possible causes of an HTTP 401 response?","expected_document_ids":["integration-error-catalog"],"k":3}
+{"case_id":"RET-003","query":"Do I need approval before reprocessing failed transactions?","expected_document_ids":["token-renewal-runbook"],"k":3}
+{"case_id":"RET-004","query":"How should a replacement OAuth token be generated after rotation?","expected_document_ids":["oauth-authentication-guide","token-renewal-runbook"],"k":3}
+{"case_id":"RET-005","query":"Requests time out after client timeout changed to five seconds","expected_document_ids":["timeout-recovery-runbook","integration-error-catalog"],"k":3}
+{"case_id":"RET-006","query":"Invoice mapping fails because buyer_id was renamed to customer_id","expected_document_ids":["invoice-mapping-runbook","integration-error-catalog"],"k":3}
+{"case_id":"RET-007","query":"HTTP 422 missing required currency field under contract v3","expected_document_ids":["payload-validation-runbook","integration-error-catalog"],"k":3}
+{"case_id":"RET-008","query":"Duplicate transaction after retry lost Idempotency-Key","expected_document_ids":["duplicate-transaction-runbook","integration-error-catalog"],"k":3}
+{"case_id":"ACL-001","query":"HTTP 401 token rotation","tenant_id":"another-enterprise","roles":["integration-engineer"],"expect_no_results":true,"k":3}
+{"case_id":"ACL-002","query":"HTTP 401 token rotation","tenant_id":"demo-enterprise","roles":["finance-viewer"],"expect_no_results":true,"k":3}

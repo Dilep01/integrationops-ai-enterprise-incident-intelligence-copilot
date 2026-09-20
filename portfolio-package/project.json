@@ -1,0 +1,58 @@
+{
+  "slug": "integrationops-ai",
+  "title": "IntegrationOps AI",
+  "subtitle": "Enterprise Incident & Integration Intelligence Copilot",
+  "tagline": "Evidence-grounded incident diagnosis with hybrid RAG, agent tools, and approval-gated remediation.",
+  "summary": "A local enterprise incident intelligence platform that investigates API and integration failures by combining versioned runbooks, operational evidence, prior incidents, hybrid retrieval, structured diagnosis, citations, and explicit safety gates.",
+  "status": "Published",
+  "featured": true,
+  "verificationDate": "2026-09-20",
+  "problem": "Integration engineers often correlate logs, configuration changes, service status, runbooks, API documentation, and past incidents by hand. That slows diagnosis and makes evidence provenance difficult to review.",
+  "solution": "IntegrationOps AI runs a controlled LangGraph workflow that classifies an incident, retrieves access-controlled evidence, calls read-only operational tools, ranks grounded hypotheses, validates citations, and returns recommended actions. A separate four-eyes workflow gates the single state-changing demo action.",
+  "supportedIncidentClasses": [
+    "authentication failure",
+    "timeout",
+    "mapping error",
+    "invalid payload",
+    "duplicate transaction"
+  ],
+  "highlights": [
+    "Two-stage RAG: Qdrant dense and sparse reciprocal-rank fusion followed by cross-encoder reranking",
+    "Retrieval-time tenant, environment, and role filters",
+    "Evidence-linked hypotheses with citation integrity and fail-closed grounding checks",
+    "Read-only tools for logs, configuration changes, service status, and incident history",
+    "Four-eyes approval, audit events, and idempotency for a local remediation simulator",
+    "Offline evaluation, OpenTelemetry spans, durable persistence, migrations, and CI quality gates"
+  ],
+  "verifiedMetrics": [
+    {"label": "Automated tests", "value": "45 passed", "scope": "local test suite"},
+    {"label": "Python coverage", "value": "91.80%", "scope": "integrationops and integration_runtime"},
+    {"label": "Retrieval Recall@K", "value": "1.0000", "scope": "10-case synthetic benchmark"},
+    {"label": "Mean reciprocal rank", "value": "1.0000", "scope": "10-case synthetic benchmark with real local embedding and reranking models"},
+    {"label": "ACL failures", "value": "0", "scope": "included synthetic retrieval benchmark"}
+  ],
+  "technology": {
+    "backend": ["Python", "FastAPI", "Pydantic", "SQLAlchemy", "Alembic"],
+    "ai": ["LangGraph", "Ollama", "Qwen3", "SentenceTransformers", "CrossEncoder"],
+    "retrieval": ["Qdrant", "dense retrieval", "sparse retrieval", "reciprocal-rank fusion", "reranking"],
+    "frontend": ["React", "TypeScript", "Vite"],
+    "operations": ["Docker Compose", "PostgreSQL", "SQLite", "OpenTelemetry", "GitHub Actions"]
+  },
+  "concepts": ["retrieval-augmented generation", "agentic workflows", "tool calling", "structured output", "grounding", "provenance", "authorization-aware retrieval", "human approval", "evaluation", "observability"],
+  "links": {
+    "repository": "https://github.com/Dilep01/integrationops-ai-enterprise-incident-intelligence-copilot",
+    "liveDemo": null
+  },
+  "assets": {
+    "cover": "assets/cover.png",
+    "architecture": "assets/architecture.png",
+    "consoleScreenshot": "screenshots/investigation-console.png",
+    "apiScreenshot": "screenshots/api-documentation.png"
+  },
+  "disclosures": [
+    "Uses synthetic enterprise evidence and local mock operational tools.",
+    "The remediation target is a local simulator, not a production integration.",
+    "Retrieval scores are regression results and must not be presented as production accuracy.",
+    "GitHub CI is configured; check the repository Actions page for the latest remote result."
+  ]
+}
