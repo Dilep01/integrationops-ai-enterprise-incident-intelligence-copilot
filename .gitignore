@@ -13,4 +13,5 @@ build/
 apps/web/dist/
 *.tsbuildinfo
 *.egg-info/
+portfolio-package/
 integrationops-ai-portfolio-package.zip

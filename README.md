@@ -204,9 +204,3 @@ See [the live validation record](docs/evaluation/ollama-live-validation.md).
 Model responses are accepted only when they match the diagnosis schema and cite evidence from the current investigation. The system fails closed if the endpoint is unavailable, returns malformed JSON, or invents an evidence identifier.
 
 See [the architecture decisions](docs/architecture/0001-controlled-investigation-workflow.md) and [the delivery plan](docs/architecture/roadmap.md).
-
-## Portfolio handoff
-
-The self-contained [portfolio package](portfolio-package/README.md) includes verified project
-copy, structured metadata, resume and interview material, architecture artwork, and real local
-application screenshots. Repository and hosted-demo links remain unset until publication.
